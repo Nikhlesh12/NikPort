@@ -155,6 +155,18 @@
         sections.forEach((section) => observer.observe(section));
     }
 
+    const animatedSections = $$('.section-pad');
+    if ('IntersectionObserver' in window && canAnimate()) {
+        const sectionLineObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add('section-in-view');
+                observer.unobserve(entry.target);
+            });
+        }, { threshold: 0.04, rootMargin: '0px 0px -12% 0px' });
+        animatedSections.forEach((section) => sectionLineObserver.observe(section));
+    } else animatedSections.forEach((section) => section.classList.add('section-in-view'));
+
     const depthElements = $$('[data-depth]');
     const heroCursorLight = $('.hero-cursor-light');
     if (finePointer.matches && canAnimate()) {
@@ -176,6 +188,22 @@
             });
         }, { passive: true });
         heroSection?.addEventListener('pointerleave', () => depthElements.forEach((element) => { element.style.transform = ''; }));
+        $$('.metric-card, .positioning-card, .featured-project, .highlight-card').forEach((card) => {
+            card.classList.add('tilt-card');
+            card.addEventListener('pointermove', (event) => {
+                const rect = card.getBoundingClientRect();
+                const x = (event.clientX - rect.left) / rect.width - 0.5;
+                const y = (event.clientY - rect.top) / rect.height - 0.5;
+                card.classList.add('is-tilting');
+                card.style.setProperty('--tilt-x', `${y * -4.5}deg`);
+                card.style.setProperty('--tilt-y', `${x * 5.5}deg`);
+            }, { passive: true });
+            card.addEventListener('pointerleave', () => {
+                card.classList.remove('is-tilting');
+                card.style.setProperty('--tilt-x', '0deg');
+                card.style.setProperty('--tilt-y', '0deg');
+            });
+        });
         $$('.magnetic-btn').forEach((button) => {
             button.addEventListener('pointermove', (event) => {
                 const rect = button.getBoundingClientRect();

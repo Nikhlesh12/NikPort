@@ -785,8 +785,8 @@ img {
     position: absolute;
     left: 22px;
     right: auto;
-    top: auto;
-    bottom: 170px;
+    top: 42%;
+    bottom: auto;
     max-width: 260px;
     padding: 18px 20px;
     border-radius: 24px;
@@ -2928,4 +2928,309 @@ body::-webkit-scrollbar-thumb {
     max-width: 520px;
     color: var(--muted);
     line-height: 1.8;
+}
+
+/* Executive editorial refinement */
+section[id] {
+    scroll-margin-top: 118px;
+}
+
+.hero-grid,
+.about-grid,
+.founder-grid {
+    align-items: start;
+}
+
+.hero-section {
+    padding-top: 54px;
+}
+
+.hero-grid-elite {
+    grid-template-columns: minmax(0, 1.04fr) minmax(390px, 0.96fr);
+    gap: clamp(42px, 5vw, 76px);
+}
+
+.hero-copy,
+.about-content,
+.founder-copy,
+.founder-highlights,
+.elite-about-grid > * {
+    min-width: 0;
+}
+
+.hero-copy h1 {
+    font-size: clamp(4.4rem, 7.4vw, 7.4rem);
+}
+
+.hero-portrait-wrap {
+    box-shadow:
+        0 42px 110px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(140, 229, 210, 0.04),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.hero-portrait-frame {
+    min-height: min(680px, calc(100vh - 190px));
+}
+
+.hero-portrait-image {
+    min-height: 100%;
+}
+
+.section-head {
+    position: relative;
+    padding-left: 24px;
+}
+
+.section-head::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 2px;
+    bottom: 2px;
+    width: 2px;
+    border-radius: 999px;
+    background: linear-gradient(180deg, var(--gold), var(--cyan), transparent);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 1.1s cubic-bezier(0.22, 1, 0.36, 1) 120ms;
+}
+
+.section-head.is-visible::after {
+    transform: scaleY(1);
+}
+
+.section-head h2 {
+    text-wrap: balance;
+}
+
+.elite-about-grid,
+.founder-grid-elite {
+    gap: clamp(34px, 5vw, 72px);
+}
+
+.about-photo-card,
+.founder-note,
+.highlight-card {
+    box-shadow: 0 28px 80px rgba(0, 0, 0, 0.3);
+}
+
+.about-photo-card img {
+    height: clamp(500px, 48vw, 590px);
+    min-height: 0;
+    object-fit: cover;
+    object-position: center 18%;
+}
+
+.founder-copy h2 {
+    font-size: clamp(2.15rem, 3.8vw, 3.2rem);
+    text-wrap: balance;
+}
+
+.founder-highlights {
+    align-content: start;
+    grid-template-rows: repeat(3, minmax(0, 1fr));
+}
+
+.highlight-card {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 176px;
+}
+
+.highlight-card::after {
+    content: '';
+    position: absolute;
+    right: -55px;
+    bottom: -70px;
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(95, 168, 255, 0.12), transparent 68%);
+    pointer-events: none;
+}
+
+.timeline::before {
+    background-size: 100% 220%;
+    animation: timelineFlow 5s linear infinite;
+}
+
+.timeline-dot {
+    isolation: isolate;
+}
+
+.timeline-dot::after {
+    content: '';
+    position: absolute;
+    inset: -7px;
+    z-index: -1;
+    border: 1px solid rgba(140, 229, 210, 0.38);
+    border-radius: inherit;
+    animation: timelinePulse 2.8s ease-out infinite;
+}
+
+.tilt-card {
+    --tilt-x: 0deg;
+    --tilt-y: 0deg;
+    --lift: 0px;
+    transform: perspective(1000px) translateY(var(--lift)) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+    transform-origin: center;
+    will-change: transform;
+}
+
+.reveal.tilt-card:not(.is-visible) {
+    transform: translateY(34px) scale(0.985);
+}
+
+.tilt-card:hover {
+    --lift: -7px;
+}
+
+.tilt-card.is-tilting {
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.12s linear;
+}
+
+.metric-card.tilt-card:hover,
+.positioning-card.tilt-card:hover,
+.featured-project.tilt-card:hover,
+.highlight-card.tilt-card:hover {
+    transform: perspective(1000px) translateY(var(--lift)) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+}
+
+.section-pad::before {
+    transform: scaleX(0.25);
+    transform-origin: center;
+    transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.8s ease;
+    opacity: 0.35;
+}
+
+.section-pad.section-in-view::before {
+    transform: scaleX(1);
+    opacity: 1;
+}
+
+@keyframes timelineFlow {
+    from { background-position: 0 0; }
+    to { background-position: 0 220%; }
+}
+
+@keyframes timelinePulse {
+    0% { opacity: 0.8; transform: scale(0.72); }
+    75%, 100% { opacity: 0; transform: scale(1.35); }
+}
+
+@media (min-width: 1181px) {
+    .hero-visual,
+    .founder-highlights {
+        position: sticky;
+        top: 126px;
+        align-self: start;
+    }
+
+    .elite-about-grid {
+        align-items: start;
+    }
+}
+
+@media (max-width: 1180px) {
+    .hero-section {
+        padding-top: 44px;
+    }
+
+    .hero-grid-elite {
+        gap: 34px;
+    }
+
+    .hero-visual {
+        width: min(720px, 100%);
+        margin-inline: auto;
+    }
+}
+
+@media (max-width: 860px) {
+    section[id] {
+        scroll-margin-top: 98px;
+    }
+
+    .hero-section {
+        padding-top: 28px;
+    }
+
+    .hero-copy h1 {
+        font-size: clamp(3rem, 15vw, 5rem);
+    }
+
+    .hero-visual {
+        order: 0;
+    }
+
+    .hero-grid-elite {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .section-head {
+        padding-left: 18px;
+    }
+}
+
+@media (max-width: 560px) {
+    :root {
+        --container: calc(100% - 24px);
+        --radius: 22px;
+    }
+
+    .section-pad {
+        padding: 76px 0;
+    }
+
+    .hero-grid-elite,
+    .elite-about-grid,
+    .founder-grid-elite,
+    .contact-stage,
+    .leadership-shell {
+        min-width: 0;
+        overflow: clip;
+    }
+
+    .hero-portrait-frame,
+    .hero-portrait-image {
+        min-height: 410px;
+    }
+
+    .floating-icons span {
+        padding: 8px 10px;
+        font-size: 0.68rem;
+    }
+
+    .brand-text small {
+        max-width: 155px;
+    }
+
+    .about-photo-card img {
+        height: 430px;
+    }
+}
+
+/* Avoid browser paint-skipping gaps in reveal-heavy editorial sections. */
+@supports (content-visibility: auto) {
+    main > section:not(.hero-section) {
+        content-visibility: visible;
+        contain-intrinsic-size: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .timeline::before,
+    .timeline-dot::after {
+        animation: none;
+    }
+
+    .tilt-card,
+    .tilt-card:hover {
+        transform: none;
+    }
 }
