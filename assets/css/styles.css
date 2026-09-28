@@ -2941,6 +2941,24 @@ section[id] {
     align-items: start;
 }
 
+.hero-copy,
+.hero-visual,
+.about-media,
+.about-content,
+.founder-copy,
+.founder-highlights {
+    align-self: start;
+}
+
+/* Critical editorial columns stay rendered even if a reveal observer is late. */
+.about-media.reveal,
+.about-content.reveal,
+.founder-copy.reveal,
+.founder-highlights.reveal {
+    opacity: 1;
+    visibility: visible;
+}
+
 .hero-section {
     padding-top: 54px;
 }

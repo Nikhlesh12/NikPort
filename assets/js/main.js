@@ -91,6 +91,12 @@
         reveals.forEach((element) => observer.observe(element));
     } else reveals.forEach((element) => element.classList.add('is-visible'));
 
+    // Rendering fail-safe: content must never remain hidden when a browser delays
+    // or skips an IntersectionObserver callback during fast/direct navigation.
+    window.setTimeout(() => {
+        reveals.forEach((element) => element.classList.add('is-visible'));
+    }, 1800);
+
     const counters = $$('.counter');
     const animateCounter = (counter) => {
         const target = Number(counter.dataset.target || 0);
