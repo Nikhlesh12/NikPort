@@ -9,5 +9,11 @@
 /assets/*
   Cache-Control: public, max-age=604800, stale-while-revalidate=86400
 
+/assets/css/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+/assets/js/*
+  Cache-Control: public, max-age=0, must-revalidate
+
 /index.html
   Cache-Control: public, max-age=0, must-revalidate

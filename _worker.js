@@ -10,9 +10,12 @@ const securityHeaders = {
 function decorate(response, pathname) {
     const headers = new Headers(response.headers);
     Object.entries(securityHeaders).forEach(([name, value]) => headers.set(name, value));
+    const isCodeAsset = /\.(?:css|js)$/i.test(pathname);
     headers.set(
         'Cache-Control',
-        pathname.startsWith('/assets/')
+        isCodeAsset
+            ? 'public, max-age=0, must-revalidate'
+            : pathname.startsWith('/assets/')
             ? 'public, max-age=604800, stale-while-revalidate=86400'
             : 'public, max-age=0, must-revalidate',
     );
