@@ -1,0 +1,17 @@
+{
+  "name": "Nikhlesh Portfolio",
+  "short_name": "Nikhlesh",
+  "description": "Founder portfolio of Nikhlesh Patidar, CEO of Advorix Technologies.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#061017",
+  "theme_color": "#061017",
+  "icons": [
+    {
+      "src": "assets/images/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
